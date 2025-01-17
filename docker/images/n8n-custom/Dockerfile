@@ -3,6 +3,12 @@ ARG NODE_VERSION=20
 # 1. Create an image to build n8n
 FROM --platform=linux/amd64 n8nio/base:${NODE_VERSION} AS builder
 
+# Install Python och pip
+RUN apk add --no-cache python3 py3-pip
+
+# Install Python libraries
+RUN pip3 install requests beautifulsoup4
+
 # Build the application from source
 WORKDIR /src
 COPY . /src
