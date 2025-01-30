@@ -4,10 +4,10 @@ ARG NODE_VERSION=20
 FROM --platform=linux/amd64 n8nio/base:${NODE_VERSION} AS builder
 
 # Install Python och pip
-RUN apk add --no-cache python3 py3-pip
+RUN apk add --no-cache python3 py3-pip tesseract-ocr poppler-utils
 
 # Install Python libraries
-RUN pip3 install requests beautifulsoup4
+RUN pip3 install --no-cache-dir pymupdf pytesseract pdf2image pillow opencv-python-headless numpy
 
 # Build the application from source
 WORKDIR /src
