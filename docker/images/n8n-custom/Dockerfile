@@ -10,7 +10,10 @@ USER root
 RUN apk add --no-cache python3 py3-pip tesseract-ocr poppler-utils
 
 # Install Python libraries
-RUN pip3 install --no-cache-dir pymupdf pytesseract pdf2image pillow opencv-python-headless numpy
+RUN python3 -m venv /opt/venv && \
+    . /opt/venv/bin/activate && \
+    pip install --no-cache-dir pymupdf pytesseract pdf2image pillow opencv-python-headless numpy
+
 
 # Build the application from source
 WORKDIR /src
@@ -70,3 +73,6 @@ RUN \
 ENV SHELL /bin/sh
 USER node
 ENTRYPOINT ["tini", "--", "/docker-entrypoint.sh"]
+
+ENV PATH="/opt/venv/bin:$PATH"
+
