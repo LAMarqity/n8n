@@ -16,7 +16,11 @@ RUN --mount=type=cache,id=pnpm-store,target=/root/.local/share/pnpm/store \
     DOCKER_BUILD=true pnpm install --frozen-lockfile
 
 # Konfigurera PNPM för globala installationer
-RUN pnpm setup && export PATH=$(pnpm bin):$PATH && pnpm add -g turbo && pnpm build
+ENV PNPM_HOME=/home/node/.pnpm
+ENV PATH=$PNPM_HOME:$PATH
+
+RUN pnpm add -g turbo && pnpm build
+
 
 RUN jq 'del(.pnpm.patchedDependencies)' package.json > package.json.tmp && mv package.json.tmp package.json
 RUN node .github/scripts/trim-fe-packageJson.js
