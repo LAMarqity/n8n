@@ -11,9 +11,7 @@ RUN apk add --no-cache python3 py3-pip tesseract-ocr poppler-utils \
     build-base cmake ninja py3-setuptools py3-wheel
 
 # Install Python libraries
-RUN python3 -m venv /opt/venv && \
-    . /opt/venv/bin/activate && \
-    pip install --no-cache-dir pymupdf pytesseract pdf2image pillow opencv-python-headless numpy
+RUN apk add --no-cache py3-opencv
 
 
 # Build the application from source
