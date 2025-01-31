@@ -3,6 +3,9 @@ ARG NODE_VERSION=20
 # 1. Create an image to build n8n
 FROM --platform=linux/amd64 n8nio/n8n:latest AS builder
 
+# Växla till root-användaren för att installera paket
+USER root
+
 # Install Python och pip
 RUN apk add --no-cache python3 py3-pip tesseract-ocr poppler-utils
 
