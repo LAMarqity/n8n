@@ -7,7 +7,8 @@ FROM --platform=linux/amd64 n8nio/n8n:latest AS builder
 USER root
 
 # Install Python och pip
-RUN apk add --no-cache python3 py3-pip tesseract-ocr poppler-utils
+RUN apk add --no-cache python3 py3-pip tesseract-ocr poppler-utils \
+    build-base cmake ninja py3-setuptools py3-wheel
 
 # Install Python libraries
 RUN python3 -m venv /opt/venv && \
